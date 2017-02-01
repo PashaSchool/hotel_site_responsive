@@ -221,6 +221,12 @@ header .fullheight {
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-justify-content: center;
+  justify-content: center;
 }
 header .hgroup {
   padding: 100px 0;
@@ -406,6 +412,12 @@ header #nav .navbar ul li a:hover {
   margin-right: auto;
   padding-left: 9.16667%;
   padding-right: 9.16667%;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-justify-content: center;
+  justify-content: center;
 }
 #rooms .room:after {
   content: " ";
@@ -424,7 +436,6 @@ header #nav .navbar ul li a:hover {
   border-radius: 10px;
   background: rgba(255, 255, 255, 0.8);
   padding: 20px;
-  margin: 200px 0;
 }
 #rooms .room .content h1 {
   color: #df4848;
