@@ -6,7 +6,7 @@ var gulp = require('gulp'),
     gulpif = require('gulp-if'),
     uglify = require('gulp-uglify'),
     minifyHTML = require('gulp-minify-html'),
-    concat = require('gulp-concat');
+    concat = require('gulp-concat'),
     path = require('path');
 
 var env,
@@ -16,7 +16,7 @@ var env,
     outputDir,
     sassStyle;
 
-env = 'development';
+env = 'production';
 
 if (env==='development') {
   outputDir = 'builds/development/';
@@ -27,9 +27,10 @@ if (env==='development') {
 }
 
 jsSources = [
-  'components/scripts/jqloader.js',
-  'components/scripts/TweenMax.min.js',
-  'components/scripts/jquery.scrollmagic.min.js',
+  // 'components/scripts/jqloader.js',
+  // 'components/scripts/tweenmax.min.js',
+  // 'components/scripts/scrollmagic.js',
+  // 'components/scripts/animation.js',
   'components/scripts/script.js'
 ];
 
@@ -38,8 +39,10 @@ htmlSources = [outputDir + '*.html'];
 
 gulp.task('js', function() {
 	gulp.src(jsSources)
-	.pipe(concat('script.js'))
-	.pipe(browserify())
+  .pipe(concat('script.js'))
+  .pipe(browserify({
+    insertGlobals : true
+  }))
 	.on('error', gutil.log)
 	.pipe(gulpif(env === 'production', uglify()))
 	.pipe(gulp.dest(outputDir + 'js'))
@@ -56,7 +59,7 @@ gulp.task('compass', function() {
        require: ['susy', 'breakpoint']
     })
     .on('error', gutil.log))
-//    .pipe(gulp.dest( outputDir + 'css'))
+   .pipe(gulp.dest( outputDir + 'css'))
     .pipe(connect.reload())
 });
 
@@ -84,5 +87,5 @@ gulp.task('move', function() {
   gulp.src('builds/development/images/**/*.*')
   .pipe(gulpif(env === 'production', gulp.dest(outputDir+'images')))
 });
-
+// 'js'
 gulp.task('default', ['watch', 'html', 'js', 'compass', 'move', 'connect']);
